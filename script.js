@@ -15,14 +15,16 @@ const giphyLinks = [
 const gifTexts = [
   "✨Will you be my Jasmine?😋", // Default gif text
   "Congratulations  you're officially mine and I'm yours✨☝️🤓", // Second gif text
-  "kiis tonoight would be the noi-👨‍🎤.....Hmm!! no???🥺" // "No" button gif text
+  "Hmm, no?" // "No" button gif text
 ];
 
-// Audio URL
-const audioUrl = 'https://audio.jukehost.co.uk/Oi1X7JzQQhmHPoJMxaQpUPfEaaJnlMgy'; // Replace with the URL of your audio file
+// Audio URLs
+const yesAudioUrl = 'https://audio.jukehost.co.uk/Oi1X7JzQQhmHPoJMxaQpUPfEaaJnlMgy'; // Replace with the URL of your "Yes" audio file
+const noAudioUrl = 'https://audio.jukehost.co.uk/P7fcj2drzIWED7YFku9cwCvHzexS5Cez';
 
-// Audio element
-const audio = new Audio(audioUrl);
+// Audio elements
+const yesAudio = new Audio(yesAudioUrl);
+const noAudio = new Audio(noAudioUrl);
 
 // Preload Giphy GIFs
 const preloadGifs = () => {
@@ -47,8 +49,11 @@ yesBtn.addEventListener("click", () => {
   // Change to the second gif after clicking "Yes"
   gifContainer.src = giphyLinks[secondGifIndex];
 
-  // Play audio when "Yes" is clicked
-  audio.play();
+  // Play "Yes" audio when "Yes" is clicked
+  yesAudio.play();
+
+  // Pause "No" audio when "Yes" is clicked
+  noAudio.pause();
 });
 
 noBtn.addEventListener("click", () => {
@@ -63,14 +68,15 @@ noBtn.addEventListener("click", () => {
   noBtn.style.left = randomX + "px";
   noBtn.style.top = randomY + "px";
 
-  // Play a gif when "No" is clicked
-  const noGifIndex = 2; // Replace with the index of the "No" button gif
-  gifContainer.src = giphyLinks[noGifIndex];
+  // Play "No" audio when "No" is clicked
+  noAudio.play();
 
   // Update text for "No" button
+  const noGifIndex = 2; // Replace with the index of the "No" button gif
+  gifContainer.src = giphyLinks[noGifIndex];
   const noButtonTextIndex = 2; // Replace with the index of the "No" button text
   question.innerHTML = gifTexts[noButtonTextIndex];
 
-  // Pause audio when "No" is clicked
-  audio.pause();
+  // Pause "Yes" audio when "No" is clicked
+  yesAudio.pause();
 });
