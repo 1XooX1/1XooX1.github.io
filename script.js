@@ -13,7 +13,6 @@ const giphyLinks = [
 
 // Corresponding text for each gif
 const gifTexts = [
-  "Psst Keshia!" 
   "✨Will you be my Jasmine?😋", // Default gif text
   "Congratulations 🎉  you're officially mine and I'm yours✨☝️🤓", // Second gif text
   "kis tonoight would be da noi- 👨‍🎤🎸 huh!! no???🥺" // "No" button gif text
