@@ -16,11 +16,10 @@ const gifTexts = [
   "✨Will you be my Jasmine?😋", // Default gif text
   "Congratulations 🎉  you're officially mine and I'm yours✨☝️🤓", // Second gif text
   "kis tonoight would be da noi- 👨‍🎤🎸 huh!! no???🥺" // "No" button gif text
-];" // "No" button gif text
 ];
 
 // Audio URLs
-const yesAudioUrl = 'https://audio.jukehost.co.uk/Oi1X7JzQQhmHPoJMxaQpUPfEaaJnlMgy'; // Replace with the URL of your "Yes" audio file
+const yesAudioUrl = 'https://audio.jukehost.co.uk/Oi1X7JzQQhmHPoJMxaQpUPfEaaJnlMgy';
 const noAudioUrl = 'https://audio.jukehost.co.uk/P7fcj2drzIWED7YFku9cwCvHzexS5Cez';
 
 // Audio elements
@@ -81,3 +80,4 @@ noBtn.addEventListener("click", () => {
   // Pause "Yes" audio when "No" is clicked
   yesAudio.pause();
 });
+  
