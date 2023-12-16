@@ -15,7 +15,7 @@ const giphyLinks = [
 const gifTexts = [
   "✨Will you be my Jasmine?😋", // Default gif text
   "Congratulations  you're officially mine and I'm yours✨☝️🤓", // Second gif text
-  "kiis tonoight would be the noi-.....Hmm!! no???🥺" // "No" button gif text
+  "kiis tonoight would be the noi-👨‍🎤.....Hmm!! no???🥺" // "No" button gif text
 ];
 
 // Audio URL
