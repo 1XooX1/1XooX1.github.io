@@ -4,12 +4,6 @@ const gifContainer = document.querySelector(".gif");
 const yesBtn = document.querySelector(".yes-btn");
 const noBtn = document.querySelector(".no-btn");
 
-// Replace 'AUDIO_URL' with the actual URL of your audio file
-const audioUrl = 'https://audio.jukehost.co.uk/Oi1X7JzQQhmHPoJMxaQpUPfEaaJnlMgy';
-
-const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-let audioBuffer;
-
 // Giphy direct GIF links
 const giphyLinks = [
   "https://media.giphy.com/media/3tE1YGjnDP6dPnL8qw/giphy.gif", // Default gif link
@@ -19,10 +13,11 @@ const giphyLinks = [
 
 // Corresponding text for each gif
 const gifTexts = [
- "✨Will you be my Jasmine?😋", // Default gif text
-  "Congratulations 🎉 you're officially mine and I'm yours✨☝️🤓", // Second gif text
-  "Hmm, no?🥺" // "No" button gif text
+  "✨Will you be my Jasmine?😋", // Default gif text
+  "Congratulations  you're officially mine and I'm yours✨☝️🤓", // Second gif text
+  "Hmm, no?" // "No" button gif text
 ];
+
 // Preload Giphy GIFs
 const preloadGifs = () => {
   giphyLinks.forEach((giphyLink) => {
@@ -38,16 +33,13 @@ const defaultGifIndex = 0;
 gifContainer.src = giphyLinks[defaultGifIndex];
 question.innerHTML = gifTexts[defaultGifIndex];
 
-yesBtn.addEventListener("click", async () => {
+yesBtn.addEventListener("click", () => {
   // Change text after clicking "Yes"
   const secondGifIndex = 1;
   question.innerHTML = gifTexts[secondGifIndex];
 
   // Change to the second gif after clicking "Yes"
   gifContainer.src = giphyLinks[secondGifIndex];
-
-  // Play audio when "Yes" is clicked
-  await playAudio();
 });
 
 noBtn.addEventListener("click", () => {
@@ -55,9 +47,12 @@ noBtn.addEventListener("click", () => {
   const maxX = window.innerWidth - noBtnRect.width;
   const maxY = window.innerHeight - noBtnRect.height;
 
+  const randomX = Math.floor(Math.random() * maxX);
+  const randomY = Math.floor(Math.random() * maxY);
+
   // Change position of "No" button
-  noBtn.style.left = Math.floor(Math.random() * maxX) + "px";
-  noBtn.style.top = Math.floor(Math.random() * maxY) + "px";
+  noBtn.style.left = randomX + "px";
+  noBtn.style.top = randomY + "px";
 
   // Play a gif when "No" is clicked
   const noGifIndex = 2; // Replace with the index of the "No" button gif
@@ -67,19 +62,3 @@ noBtn.addEventListener("click", () => {
   const noButtonTextIndex = 2; // Replace with the index of the "No" button text
   question.innerHTML = gifTexts[noButtonTextIndex];
 });
-
-async function playAudio() {
-  try {
-    const response = await fetch(audioUrl);
-    const arrayBuffer = await response.arrayBuffer();
-    audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
-
-    const source = audioContext.createBufferSource();
-    source.buffer = audioBuffer;
-    source.connect(audioContext.destination);
-
-    source.start();
-  } catch (error) {
-    console.error("Error loading or playing audio:", error);
-  }
-  }
