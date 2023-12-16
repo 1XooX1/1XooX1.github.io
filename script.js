@@ -18,6 +18,12 @@ const gifTexts = [
   "Hmm, no?" // "No" button gif text
 ];
 
+// Audio URL
+const audioUrl = 'https://audio.jukehost.co.uk/Oi1X7JzQQhmHPoJMxaQpUPfEaaJnlMgy'; // Replace with the URL of your audio file
+
+// Audio element
+const audio = new Audio(audioUrl);
+
 // Preload Giphy GIFs
 const preloadGifs = () => {
   giphyLinks.forEach((giphyLink) => {
@@ -40,6 +46,9 @@ yesBtn.addEventListener("click", () => {
 
   // Change to the second gif after clicking "Yes"
   gifContainer.src = giphyLinks[secondGifIndex];
+
+  // Play audio when "Yes" is clicked
+  audio.play();
 });
 
 noBtn.addEventListener("click", () => {
@@ -61,4 +70,7 @@ noBtn.addEventListener("click", () => {
   // Update text for "No" button
   const noButtonTextIndex = 2; // Replace with the index of the "No" button text
   question.innerHTML = gifTexts[noButtonTextIndex];
+
+  // Pause audio when "No" is clicked
+  audio.pause();
 });
