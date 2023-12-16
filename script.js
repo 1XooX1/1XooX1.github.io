@@ -9,6 +9,7 @@ const audioUrl = 'https://audio.jukehost.co.uk/Oi1X7JzQQhmHPoJMxaQpUPfEaaJnlMgy'
 
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 let audioBuffer;
+let audioSource;
 
 // Giphy direct GIF links
 const giphyLinks = [
@@ -39,7 +40,7 @@ const defaultGifIndex = 0;
 gifContainer.src = giphyLinks[defaultGifIndex];
 question.innerHTML = gifTexts[defaultGifIndex];
 
-yesBtn.addEventListener("click", async () => {
+yesBtn.addEventListener("click", () => {
   // Change text after clicking "Yes"
   const secondGifIndex = 1;
   question.innerHTML = gifTexts[secondGifIndex];
@@ -47,18 +48,16 @@ yesBtn.addEventListener("click", async () => {
   // Change to the second gif after clicking "Yes"
   gifContainer.src = giphyLinks[secondGifIndex];
 
+  // Stop audio if it's already playing
+  stopAudio();
+
   // Play audio when "Yes" is clicked
-  await playAudio();
+  playAudio();
 });
 
 noBtn.addEventListener("click", () => {
-  const noBtnRect = noBtn.getBoundingClientRect();
-  const maxX = window.innerWidth - noBtnRect.width;
-  const maxY = window.innerHeight - noBtnRect.height;
-
-  // Change position of "No" button
-  noBtn.style.left = Math.floor(Math.random() * maxX) + "px";
-  noBtn.style.top = Math.floor(Math.random() * maxY) + "px";
+  // Stop audio if it's already playing
+  stopAudio();
 
   // Play a gif when "No" is clicked
   const noGifIndex = 2; // Replace with the index of the "No" button gif
@@ -69,18 +68,6 @@ noBtn.addEventListener("click", () => {
   question.innerHTML = gifTexts[noButtonTextIndex];
 });
 
-async function playAudio() {
-  try {
-    const response = await fetch(audioUrl);
-    const arrayBuffer = await response.arrayBuffer();
-    audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
 
-    const source = audioContext.createBufferSource();
-    source.buffer = audioBuffer;
-    source.connect(audioContext.destination);
-
-    source.start();
-  } catch (error) {
-    console.error("Error loading or playing audio:", error);
   }
 }
